@@ -1,0 +1,79 @@
+/* Estilos globais e de acessibilidade avançada */
+:root {
+    --font-scale: 1rem;
+}
+
+body {
+    font-size: var(--font-scale);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Foco de teclado altamente visível para acessibilidade */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+select:focus-visible, 
+textarea:focus-visible {
+    outline: 4px solid #2563eb !important;
+    outline-offset: 3px !important;
+}
+
+/* Modo Alto Contraste */
+body.high-contrast {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+}
+
+body.high-contrast header, 
+body.high-contrast footer, 
+body.high-contrast .bg-white,
+body.high-contrast .bg-slate-50 {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+    border-color: #ffff00 !important;
+}
+
+body.high-contrast .bg-blue-600, 
+body.high-contrast .bg-emerald-600,
+body.high-contrast .bg-indigo-700 {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    font-weight: bold;
+}
+
+body.high-contrast a, 
+body.high-contrast button {
+    color: #ffff00 !important;
+    border-color: #ffff00 !important;
+}
+
+/* Modo Calmo / Redução de Estímulos para Neurodiversidade / Autismo */
+body.calm-mode * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+}
+
+body.calm-mode {
+    background-color: #f0f4f8 !important;
+    color: #2d3748 !important;
+}
+
+body.calm-mode .bg-blue-600 {
+    background-color: #6482ad !important;
+}
+
+body.calm-mode .bg-emerald-600 {
+    background-color: #799351 !important;
+}
+
+body.calm-mode .bg-white,
+body.calm-mode .bg-slate-50 {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+/* Classes auxiliares para tamanhos de fonte */
+.text-scale-1 { font-size: 1rem; }
+.text-scale-2 { font-size: 1.15rem; }
+.text-scale-3 { font-size: 1.3rem; }
