@@ -1,8 +1,5 @@
-// VARIÁVEIS DE ESTADO
 let currentScaleIndex = 0;
 const scales = ['text-scale-1', 'text-scale-2', 'text-scale-3'];
-
-// 1. GERENCIAMENTO DE TAMANHO DA FONTE
 function changeFontSize(direction) {
     const body = document.body;
     body.classList.remove(...scales);
@@ -22,8 +19,6 @@ function resetFontSize() {
     currentScaleIndex = 0;
     body.classList.add(scales[0]);
 }
-
-// 2. TOGGLE DE ALTO CONTRASTE
 function toggleHighContrast() {
     const body = document.body;
     const btn = document.getElementById('contrastBtn');
@@ -40,8 +35,6 @@ function toggleHighContrast() {
         toggleCalmMode();
     }
 }
-
-// 3. TOGGLE DE MODO CALMO (AUTISMO / NEURODIVERSIDADE)
 function toggleCalmMode() {
     const body = document.body;
     const btn = document.getElementById('calmBtn');
@@ -52,14 +45,10 @@ function toggleCalmMode() {
     if (btn) {
         btn.setAttribute('aria-pressed', isCalmMode ? 'true' : 'false');
     }
-
-    // Desativa alto contraste se ativo
     if (isCalmMode && body.classList.contains('high-contrast')) {
         toggleHighContrast();
     }
 }
-
-// 4. MODAL LIBRAS
 function openLibrasModal() {
     const modal = document.getElementById('librasModal');
     if (modal) {
@@ -73,13 +62,9 @@ function closeLibrasModal() {
         modal.classList.add('hidden');
     }
 }
-
-// 5. FILTRO DE PETS NA GALERIA
 function filterPets(category, element) {
     const cards = document.querySelectorAll('.pet-card');
     const filterButtons = document.querySelectorAll('.filter-btn');
-
-    // Atualiza o estado dos botões
     filterButtons.forEach(btn => {
         btn.classList.remove('bg-emerald-600', 'text-white', 'active');
         btn.classList.add('bg-white', 'text-slate-700');
@@ -91,8 +76,6 @@ function filterPets(category, element) {
         element.classList.add('bg-emerald-600', 'text-white', 'active');
         element.setAttribute('aria-pressed', 'true');
     }
-
-    // Filtra os cards
     cards.forEach(card => {
         const cardCategories = card.getAttribute('data-category');
         if (category === 'all' || cardCategories.includes(category)) {
@@ -102,8 +85,6 @@ function filterPets(category, element) {
         }
     });
 }
-
-// 6. SELEÇÃO DIRETA DO PET PARA ADOÇÃO
 function selectPetForAdoption(petName) {
     const petSelect = document.getElementById('selectedPetInput');
     const formSection = document.getElementById('adotar-form');
@@ -116,8 +97,6 @@ function selectPetForAdoption(petName) {
         formSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
-
-// 7. ENVIO DO FORMULÁRIO DE ADOÇÃO
 function handleAdoptionSubmit(event) {
     event.preventDefault();
     const alert = document.getElementById('form-success-alert');
@@ -132,8 +111,6 @@ function handleAdoptionSubmit(event) {
         form.reset();
     }
 }
-
-// 8. ENVIO DO FORMULÁRIO DE CONTATO
 function handleContactSubmit(event) {
     event.preventDefault();
     const alert = document.getElementById('contact-success-alert');

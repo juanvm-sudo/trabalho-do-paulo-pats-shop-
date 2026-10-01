@@ -8,7 +8,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Foco de teclado altamente visível para acessibilidade */
 a:focus-visible, 
 button:focus-visible, 
 input:focus-visible, 
@@ -18,7 +17,6 @@ textarea:focus-visible {
     outline-offset: 3px !important;
 }
 
-/* Modo Alto Contraste */
 body.high-contrast {
     background-color: #000000 !important;
     color: #ffff00 !important;
@@ -46,8 +44,6 @@ body.high-contrast button {
     color: #ffff00 !important;
     border-color: #ffff00 !important;
 }
-
-/* Modo Calmo / Redução de Estímulos para Neurodiversidade / Autismo */
 body.calm-mode * {
     animation: none !important;
     transition: none !important;
@@ -73,7 +69,6 @@ body.calm-mode .bg-slate-50 {
     border: 1px solid #cbd5e1 !important;
 }
 
-/* Classes auxiliares para tamanhos de fonte */
 .text-scale-1 { font-size: 1rem; }
 .text-scale-2 { font-size: 1.15rem; }
 .text-scale-3 { font-size: 1.3rem; }
