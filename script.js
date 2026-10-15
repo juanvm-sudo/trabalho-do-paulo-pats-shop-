@@ -1,16 +1,16 @@
 let currentScaleIndex = 0;
 const scales = ['text-scale-1', 'text-scale-2', 'text-scale-3'];
 
-// Função para entrada no site (Corrigida)
+// Função para entrada no site (Totalmente corrigida)
 function enterSite(mode) {
     const welcomeModal = document.getElementById('welcomeScreen');
     if (welcomeModal) {
-        // Esconde a tela de entrada usando estilo direto e classe
-        welcomeModal.style.display = 'none';
+        // Oculta totalmente o modal imediatamente
+        welcomeModal.style.setProperty('display', 'none', 'important');
         welcomeModal.classList.add('hidden');
     }
     
-    // Se escolheu o modo calmo
+    // Ativa o modo calmo se selecionado
     if (mode === 'calm') {
         const body = document.body;
         if (!body.classList.contains('calm-mode')) {
@@ -21,28 +21,24 @@ function enterSite(mode) {
 
 // Navegação por Abas
 function switchTab(tabId) {
-    // Esconde todas as seções
     const sections = document.querySelectorAll('.tab-content');
     sections.forEach(section => {
         section.classList.add('hidden');
         section.style.display = 'none';
     });
 
-    // Remove destaque de todos os botões da barra
     const tabButtons = document.querySelectorAll('.tab-btn');
     tabButtons.forEach(btn => {
         btn.classList.remove('bg-emerald-100', 'text-emerald-800', 'font-bold');
         btn.classList.add('hover:bg-slate-100');
     });
 
-    // Mostra a seção ativa
     const activeSection = document.getElementById(tabId);
     if (activeSection) {
         activeSection.classList.remove('hidden');
         activeSection.style.display = 'block';
     }
 
-    // Destaca o botão selecionado
     const activeBtn = document.getElementById(`tab-${tabId}`);
     if (activeBtn) {
         activeBtn.classList.add('bg-emerald-100', 'text-emerald-800', 'font-bold');
