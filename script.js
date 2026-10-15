@@ -1,5 +1,48 @@
 let currentScaleIndex = 0;
 const scales = ['text-scale-1', 'text-scale-2', 'text-scale-3'];
+
+// Função para entrada no site
+function enterSite(mode) {
+    const welcomeModal = document.getElementById('welcomeScreen');
+    if (welcomeModal) {
+        welcomeModal.classList.add('hidden');
+    }
+    if (mode === 'calm') {
+        toggleCalmMode();
+    }
+}
+
+// Navegação por Abas
+function switchTab(tabId) {
+    // Esconde todas as seções
+    const sections = document.querySelectorAll('.tab-content');
+    sections.forEach(section => {
+        section.classList.add('hidden');
+    });
+
+    // Remove destaque de todos os botões da barra
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(btn => {
+        btn.classList.remove('bg-emerald-100', 'text-emerald-800', 'font-bold');
+        btn.classList.add('hover:bg-slate-100');
+    });
+
+    // Mostra a seção ativa
+    const activeSection = document.getElementById(tabId);
+    if (activeSection) {
+        activeSection.classList.remove('hidden');
+    }
+
+    // Destaca o botão selecionado
+    const activeBtn = document.getElementById(`tab-${tabId}`);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-emerald-100', 'text-emerald-800', 'font-bold');
+        activeBtn.classList.remove('hover:bg-slate-100');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function changeFontSize(direction) {
     const body = document.body;
     body.classList.remove(...scales);
@@ -19,6 +62,7 @@ function resetFontSize() {
     currentScaleIndex = 0;
     body.classList.add(scales[0]);
 }
+
 function toggleHighContrast() {
     const body = document.body;
     const btn = document.getElementById('contrastBtn');
@@ -30,11 +74,11 @@ function toggleHighContrast() {
         btn.setAttribute('aria-pressed', isHighContrast ? 'true' : 'false');
     }
 
-    // Desativa modo calmo se ativo para evitar conflitos visuais
     if (isHighContrast && body.classList.contains('calm-mode')) {
         toggleCalmMode();
     }
 }
+
 function toggleCalmMode() {
     const body = document.body;
     const btn = document.getElementById('calmBtn');
@@ -49,6 +93,7 @@ function toggleCalmMode() {
         toggleHighContrast();
     }
 }
+
 function openLibrasModal() {
     const modal = document.getElementById('librasModal');
     if (modal) {
@@ -62,6 +107,7 @@ function closeLibrasModal() {
         modal.classList.add('hidden');
     }
 }
+
 function filterPets(category, element) {
     const cards = document.querySelectorAll('.pet-card');
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -85,18 +131,16 @@ function filterPets(category, element) {
         }
     });
 }
+
 function selectPetForAdoption(petName) {
     const petSelect = document.getElementById('selectedPetInput');
-    const formSection = document.getElementById('adotar-form');
+    switchTab('adotar-form');
 
     if (petSelect) {
         petSelect.value = petName;
     }
-
-    if (formSection) {
-        formSection.scrollIntoView({ behavior: 'smooth' });
-    }
 }
+
 function handleAdoptionSubmit(event) {
     event.preventDefault();
     const alert = document.getElementById('form-success-alert');
@@ -111,6 +155,7 @@ function handleAdoptionSubmit(event) {
         form.reset();
     }
 }
+
 function handleContactSubmit(event) {
     event.preventDefault();
     const alert = document.getElementById('contact-success-alert');

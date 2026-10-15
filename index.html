@@ -14,8 +14,8 @@
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Estilos Customizados -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Estilos Customizados (Nome corrigido) -->
+    <link rel="stylesheet" href="stye.css">
 
     <script>
         tailwind.config = {
@@ -31,6 +31,30 @@
     </script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased text-scale-1">
+
+    <!-- TELA DE ENTRADA / WELCOME MODAL (NOVA FUNCIONALIDADE) -->
+    <div id="welcomeScreen" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-8 text-center shadow-2xl border border-slate-200">
+            <div class="w-20 h-20 bg-emerald-600 text-white rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg">
+                <i class="fa-solid fa-paw" aria-hidden="true"></i>
+            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Bem-vindo ao Amigo Fiel!</h1>
+            <p class="text-slate-600 text-base mb-6 leading-relaxed">
+                Um espaço inclusivo para encontrar seu novo melhor amigo. Nosso site possui ferramentas completas de acessibilidade.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button onclick="enterSite('standard')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Entrar no Site</span>
+                </button>
+                <button onclick="enterSite('calm')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-spa text-emerald-300"></i>
+                    <span>Entrar em Modo Calmo</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- BARRA DE ACESSIBILIDADE NO TOPO -->
     <aside aria-label="Barra de Acessibilidade" class="bg-slate-900 text-white py-2 px-4 shadow-md">
@@ -70,10 +94,10 @@
         </div>
     </aside>
 
-    <!-- CABEÇALHO PRINCIPAL -->
+    <!-- CABEÇALHO PRINCIPAL E NAVEGAÇÃO EM ABAS -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 focus:outline-none focus:ring-4 focus:ring-blue-600 rounded-lg p-1">
+            <a href="#" onclick="switchTab('inicio')" class="flex items-center gap-3 focus:outline-none focus:ring-4 focus:ring-blue-600 rounded-lg p-1">
                 <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center text-2xl shadow">
                     <i class="fa-solid fa-paw" aria-hidden="true"></i>
                 </div>
@@ -83,25 +107,25 @@
                 </div>
             </a>
 
-            <!-- Navegação Principal -->
-            <nav class="hidden md:flex items-center gap-6 font-medium text-slate-700">
-                <a href="#inicio" class="hover:text-emerald-600 transition p-2 rounded">Início</a>
-                <a href="#como-funciona" class="hover:text-emerald-600 transition p-2 rounded">Como Adoção Funciona</a>
-                <a href="#pets" class="hover:text-emerald-600 transition p-2 rounded">Adotar um Pet</a>
-                <a href="#adotar-form" class="hover:text-emerald-600 transition p-2 rounded">Formulário de Adoção</a>
-                <a href="#contato" class="hover:text-emerald-600 transition p-2 rounded">Contato</a>
+            <!-- Navegação por Abas -->
+            <nav class="hidden md:flex items-center gap-2 font-medium text-slate-700">
+                <button onclick="switchTab('inicio')" id="tab-inicio" class="tab-btn px-4 py-2 rounded-xl transition bg-emerald-100 text-emerald-800 font-bold">Início</button>
+                <button onclick="switchTab('como-funciona')" id="tab-como-funciona" class="tab-btn px-4 py-2 rounded-xl transition hover:bg-slate-100">Como Funciona</button>
+                <button onclick="switchTab('pets')" id="tab-pets" class="tab-btn px-4 py-2 rounded-xl transition hover:bg-slate-100">Adotar um Pet</button>
+                <button onclick="switchTab('adotar-form')" id="tab-adotar-form" class="tab-btn px-4 py-2 rounded-xl transition hover:bg-slate-100">Formulário</button>
+                <button onclick="switchTab('contato')" id="tab-contato" class="tab-btn px-4 py-2 rounded-xl transition hover:bg-slate-100">Contato</button>
             </nav>
 
-            <a href="#pets" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow transition flex items-center gap-2 focus:ring-4 focus:ring-blue-600">
+            <button onclick="switchTab('pets')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow transition flex items-center gap-2 focus:ring-4 focus:ring-blue-600">
                 <i class="fa-solid fa-heart" aria-hidden="true"></i>
                 <span>Quero Adotar</span>
-            </a>
+            </button>
         </div>
     </header>
 
-    <main id="inicio">
-        <!-- SEÇÃO HERO -->
-        <section class="py-12 md:py-20 bg-gradient-to-b from-emerald-50/70 to-slate-50 border-b border-slate-200">
+    <main class="min-h-[70vh]">
+        <!-- ABA 1: INÍCIO (HERO) -->
+        <section id="inicio" class="tab-content py-12 md:py-20 bg-gradient-to-b from-emerald-50/70 to-slate-50 border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
                     <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full text-sm font-semibold">
@@ -115,25 +139,25 @@
                         Nosso Pet Shop e centro de adoção é adaptado para receber a todos com conforto. Seja você surdo, com baixa visão ou autista, nosso espaço e site oferecem suporte completo para que você encontre um companheiro peludo.
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="#pets" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-3">
+                        <button onclick="switchTab('pets')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-3">
                             <i class="fa-solid fa-dog text-lg" aria-hidden="true"></i>
                             <span>Ver Pets Disponíveis</span>
-                        </a>
-                        <a href="#como-funciona" class="bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-semibold px-6 py-3.5 rounded-xl shadow-sm transition flex items-center gap-3">
+                        </button>
+                        <button onclick="switchTab('como-funciona')" class="bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-semibold px-6 py-3.5 rounded-xl shadow-sm transition flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-emerald-600 text-lg" aria-hidden="true"></i>
                             <span>Conhecer 3 Passos</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div class="relative">
                     <div class="bg-emerald-200/50 absolute -inset-4 rounded-3xl -z-10 blur-xl"></div>
-                    <img src="https://placehold.co/600x400/e2e8f0/1e293b?text=Cao+e+Gato+Felizes" alt="Ilustração acolhedora de um cachorro e um gato felizes lado a lado" class="rounded-2xl shadow-xl w-full object-h-auto border border-slate-200" onerror="this.src='https://placehold.co/600x400/10b981/ffffff?text=Amigo+Fiel'">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Cão beagle feliz sorrindo no parque" class="rounded-2xl shadow-xl w-full h-96 object-cover border border-slate-200">
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO: COMO FUNCIONA EM 3 PASSOS -->
-        <section id="como-funciona" class="py-16 px-4 bg-white border-b border-slate-200">
+        <!-- ABA 2: COMO FUNCIONA EM 3 PASSOS -->
+        <section id="como-funciona" class="tab-content hidden py-16 px-4 bg-white border-b border-slate-200">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center max-w-2xl mx-auto mb-12">
                     <h2 class="text-3xl font-bold text-slate-900 mb-3">Como Funciona a Adoção em 3 Passos Simples</h2>
@@ -141,44 +165,29 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Passo 1 -->
                     <div class="bg-slate-50 border border-slate-200 p-8 rounded-2xl shadow-sm flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-bold rounded-2xl flex items-center justify-center mb-6 shadow">
-                            1
-                        </div>
+                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-bold rounded-2xl flex items-center justify-center mb-6 shadow">1</div>
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Escolha o seu Pet</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            Navegue pela nossa galeria abaixo. Cada animalzinho possui descrição clara do temperamento (ex: calmo, brincalhão, ideal para apartamento).
-                        </p>
+                        <p class="text-slate-600 leading-relaxed">Navegue pela nossa galeria. Cada animalzinho possui descrição clara do temperamento (ex: calmo, brincalhão, ideal para apartamento).</p>
                     </div>
 
-                    <!-- Passo 2 -->
                     <div class="bg-slate-50 border border-slate-200 p-8 rounded-2xl shadow-sm flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-bold rounded-2xl flex items-center justify-center mb-6 shadow">
-                            2
-                        </div>
+                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-bold rounded-2xl flex items-center justify-center mb-6 shadow">2</div>
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Preencha o Formulário</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            Responda nosso formulário inclusivo e simplificado. Sem pegadinhas, com perguntas diretas sobre sua rotina e lar.
-                        </p>
+                        <p class="text-slate-600 leading-relaxed">Responda nosso formulário inclusivo e simplificado. Sem pegadinhas, com perguntas diretas sobre sua rotina e lar.</p>
                     </div>
 
-                    <!-- Passo 3 -->
                     <div class="bg-slate-50 border border-slate-200 p-8 rounded-2xl shadow-sm flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-bold rounded-2xl flex items-center justify-center mb-6 shadow">
-                            3
-                        </div>
+                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-bold rounded-2xl flex items-center justify-center mb-6 shadow">3</div>
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Receba em Casa ou Visite</h3>
-                        <p class="text-slate-600 leading-relaxed">
-                            Nossa equipe entrará em contato com calma e clareza para agendar a entrega do pet ou sua visita guiada com ambiente acolhedor.
-                        </p>
+                        <p class="text-slate-600 leading-relaxed">Nossa equipe entrará em contato com calma e clareza para agendar a entrega do pet ou sua visita guiada com ambiente acolhedor.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- GALERIA DE PETS PARA ADOÇÃO -->
-        <section id="pets" class="py-16 px-4 bg-slate-50">
+        <!-- ABA 3: GALERIA DE PETS -->
+        <section id="pets" class="tab-content hidden py-16 px-4 bg-slate-50">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                     <div>
@@ -186,7 +195,6 @@
                         <h2 class="text-3xl font-extrabold text-slate-900">Pets Prontos para Ganhar um Lar</h2>
                     </div>
 
-                    <!-- Filtros Acessíveis -->
                     <div role="group" aria-label="Filtrar pets" class="flex flex-wrap gap-2">
                         <button onclick="filterPets('all', this)" class="filter-btn bg-emerald-600 text-white px-4 py-2 rounded-xl font-medium shadow-sm transition active" aria-pressed="true">Todos</button>
                         <button onclick="filterPets('dog', this)" class="filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl font-medium transition" aria-pressed="false">Cachorros</button>
@@ -195,68 +203,89 @@
                     </div>
                 </div>
 
-                <!-- Grid de Cards de Pets -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="pets-grid">
                     
                     <!-- Pet 1 -->
                     <div class="pet-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-category="dog calm">
-                        <img src="https://placehold.co/400x300/e2e8f0/334155?text=Thor+-+Cachorro" alt="Cachorro da raça Labrador caramelo deitado calmamente sorrindo" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/10b981/ffffff?text=Thor'">
+                        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80" alt="Cachorro Golden Retriever dourado sentado sorrindo" class="w-full h-56 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="text-2xl font-bold text-slate-900">Thor</h3>
                                 <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Cachorro</span>
                             </div>
                             <p class="text-sm font-medium text-emerald-700 mb-3"><i class="fa-solid fa-cake-candles mr-1"></i> 3 anos • Porte Médio</p>
-                            <p class="text-slate-600 text-sm mb-4 flex-grow">
-                                Extremamente dócil, adora carinho na barriga e convive muito bem com crianças e outros animais. Perfeito para lares tranquilos.
-                            </p>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">Extremamente dócil, adora carinho na barriga e convive muito bem com crianças e outros animais.</p>
                             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded">Temperamento: Muito Calmo</span>
-                                <button onclick="selectPetForAdoption('Thor')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">
-                                    Quero Adotar
-                                </button>
+                                <span class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded">Temperamento: Calmo</span>
+                                <button onclick="selectPetForAdoption('Thor')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">Quero Adotar</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Pet 2 -->
                     <div class="pet-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-category="cat calm">
-                        <img src="https://placehold.co/400x300/e2e8f0/334155?text=Mia+-+Gata" alt="Gata branca e cinza de olhos azuis dormindo tranquilamente" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/10b981/ffffff?text=Mia'">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Gato listrado olhando para a câmera com olhos verdes" class="w-full h-56 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="text-2xl font-bold text-slate-900">Mia</h3>
                                 <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">Gato</span>
                             </div>
                             <p class="text-sm font-medium text-emerald-700 mb-3"><i class="fa-solid fa-cake-candles mr-1"></i> 2 anos • Porte Pequeno</p>
-                            <p class="text-slate-600 text-sm mb-4 flex-grow">
-                                Gatinha independente, silenciosa e muito carinhosa. Passa o dia ronronando e gosta de observar pela janela.
-                            </p>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">Gatinha independente, silenciosa e muito carinhosa. Passa o dia ronronando e gosta de observar a janela.</p>
                             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                                 <span class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded">Temperamento: Tranquila</span>
-                                <button onclick="selectPetForAdoption('Mia')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">
-                                    Quero Adotar
-                                </button>
+                                <button onclick="selectPetForAdoption('Mia')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">Quero Adotar</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Pet 3 -->
                     <div class="pet-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-category="dog">
-                        <img src="https://placehold.co/400x300/e2e8f0/334155?text=Bob+-+Cachorro" alt="Cachorro filhote marrom correndo alegremente num gramado verde" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/10b981/ffffff?text=Bob'">
+                        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" alt="Filhote de cão correndo e brincando" class="w-full h-56 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <div class="flex items-center justify-between mb-2">
                                 <h3 class="text-2xl font-bold text-slate-900">Bob</h3>
                                 <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Cachorro</span>
                             </div>
                             <p class="text-sm font-medium text-emerald-700 mb-3"><i class="fa-solid fa-cake-candles mr-1"></i> 1 ano • Porte Pequeno</p>
-                            <p class="text-slate-600 text-sm mb-4 flex-grow">
-                                Brincalhão, cheio de energia positiva e muito inteligente. Vacinado, castrado e pronto para alegrar sua casa.
-                            </p>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">Brincalhão, cheio de energia positiva e muito inteligente. Vacinado e pronto para alegrar seu lar.</p>
                             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                                 <span class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded">Temperamento: Alegre</span>
-                                <button onclick="selectPetForAdoption('Bob')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">
-                                    Quero Adotar
-                                </button>
+                                <button onclick="selectPetForAdoption('Bob')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">Quero Adotar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pet 4 (Novo) -->
+                    <div class="pet-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-category="cat calm">
+                        <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=600&q=80" alt="Gato fofo dormindo e descansando" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-2xl font-bold text-slate-900">Luna</h3>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">Gato</span>
+                            </div>
+                            <p class="text-sm font-medium text-emerald-700 mb-3"><i class="fa-solid fa-cake-candles mr-1"></i> 4 anos • Porte Pequeno</p>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">Adora ambientes tranquilos e noites sossegadas. Perfeita para quem busca um pet calmo e companheiro.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded">Temperamento: Muito Calmo</span>
+                                <button onclick="selectPetForAdoption('Luna')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">Quero Adotar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pet 5 (Novo) -->
+                    <div class="pet-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-category="dog calm">
+                        <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=600&q=80" alt="Cachorro vira-lata amigável deitado no gramado" class="w-full h-56 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-2xl font-bold text-slate-900">Pipoca</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Cachorro</span>
+                            </div>
+                            <p class="text-sm font-medium text-emerald-700 mb-3"><i class="fa-solid fa-cake-candles mr-1"></i> 2 anos • Porte Médio</p>
+                            <p class="text-slate-600 text-sm mb-4 flex-grow">Cão sociável, paciente e carinhoso. Ótimo acompanhante para caminhadas leves ao ar livre.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1 rounded">Temperamento: Dócil</span>
+                                <button onclick="selectPetForAdoption('Pipoca')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition focus:ring-4 focus:ring-blue-600">Quero Adotar</button>
                             </div>
                         </div>
                     </div>
@@ -265,8 +294,8 @@
             </div>
         </section>
 
-        <!-- FORMULÁRIO DE ADOÇÃO INCLUSIVO -->
-        <section id="adotar-form" class="py-16 px-4 bg-white border-t border-slate-200">
+        <!-- ABA 4: FORMULÁRIO DE ADOÇÃO -->
+        <section id="adotar-form" class="tab-content hidden py-16 px-4 bg-white border-t border-slate-200">
             <div class="max-w-3xl mx-auto bg-slate-50 border border-slate-200 rounded-3xl p-8 md:p-12 shadow-sm">
                 <div class="text-center mb-8">
                     <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Formulário Simplificado</span>
@@ -274,7 +303,6 @@
                     <p class="text-slate-600 mt-1">Preencha abaixo com calma. Retornaremos o contato sem pressões.</p>
                 </div>
 
-                <!-- Alerta Visual de Sucesso -->
                 <div id="form-success-alert" role="status" aria-live="polite" class="hidden mb-6 bg-emerald-100 border-2 border-emerald-600 text-emerald-900 p-4 rounded-2xl flex items-center gap-4 shadow-sm">
                     <i class="fa-solid fa-circle-check text-3xl text-emerald-600" aria-hidden="true"></i>
                     <div>
@@ -301,6 +329,8 @@
                                 <option value="Thor">Thor (Cachorro)</option>
                                 <option value="Mia">Mia (Gato)</option>
                                 <option value="Bob">Bob (Cachorro)</option>
+                                <option value="Luna">Luna (Gato)</option>
+                                <option value="Pipoca">Pipoca (Cachorro)</option>
                                 <option value="Outro">Outro / Indiferente</option>
                             </select>
                         </div>
@@ -329,8 +359,8 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DE CONTATO E DÚVIDAS -->
-        <section id="contato" class="py-16 px-4 bg-slate-50 border-t border-slate-200">
+        <!-- ABA 5: CONTATO E DÚVIDAS -->
+        <section id="contato" class="tab-content hidden py-16 px-4 bg-slate-50 border-t border-slate-200">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <span class="text-emerald-700 font-bold uppercase text-sm tracking-wider block mb-1">Fale Conosco</span>
@@ -400,12 +430,12 @@
                 </p>
             </div>
             <div>
-                <h4 class="font-bold text-lg mb-4 text-emerald-400">Links Rápidos</h4>
+                <h4 class="font-bold text-lg mb-4 text-emerald-400">Navegação</h4>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li><a href="#inicio" class="hover:text-white transition">Início da Página</a></li>
-                    <li><a href="#como-funciona" class="hover:text-white transition">Como Funciona</a></li>
-                    <li><a href="#pets" class="hover:text-white transition">Galeria de Pets</a></li>
-                    <li><a href="#adotar-form" class="hover:text-white transition">Formulário de Adoção</a></li>
+                    <li><button onclick="switchTab('inicio')" class="hover:text-white transition">Início</button></li>
+                    <li><button onclick="switchTab('como-funciona')" class="hover:text-white transition">Como Funciona</button></li>
+                    <li><button onclick="switchTab('pets')" class="hover:text-white transition">Galeria de Pets</button></li>
+                    <li><button onclick="switchTab('adotar-form')" class="hover:text-white transition">Formulário de Adoção</button></li>
                 </ul>
             </div>
             <div>
@@ -413,9 +443,6 @@
                 <p class="text-slate-400 text-sm leading-relaxed mb-4">
                     Este site conta com barras de contraste, redimensionamento de fonte, tradução guiada em LIBRAS e modo calmo para autistas.
                 </p>
-                <div class="flex items-center gap-3 text-2xl text-emerald-400">
-                    <i class="fa-solid fa-universal-access" title="Acessibilidade Total"></i>
-                </div>
             </div>
         </div>
     </footer>
